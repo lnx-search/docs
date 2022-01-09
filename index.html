@@ -14,10 +14,9 @@
         }
     </style>
 </head>
-<body>
-<redoc id="reloadable" spec-url="/latest/openapi.json"></redoc>
-<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+<body id="bod">
 </body>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
 <script defer>
     function openApiPath() {
         const params = new URLSearchParams(window.location.search);
@@ -25,10 +24,9 @@
         return `/${version}/openapi.json`
     }
 
+    const options = {};
+    const element = document.getElementById("bod");
     const path = openApiPath();
-    document.getElementById("reloadable")
-        .setAttribute("spec-url", path);
-
-    console.log("adjusting versions")
+    Redoc.init(path, options, element);
 </script>
 </html>
