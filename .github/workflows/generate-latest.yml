@@ -1,4 +1,4 @@
-name: Generate-Latest
+name: GenerateLatest
 
 on:
   push:
