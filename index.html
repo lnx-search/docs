@@ -14,18 +14,21 @@
         }
     </style>
 </head>
-<body v-scope>
-<redoc v-if="true" v-bind:spec-url="openApiPath"></redoc>
+<body>
+<redoc id="reloadable" spec-url="/latest/openapi.json"></redoc>
 <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
 </body>
-<script src="https://unpkg.com/petite-vue"></script>
 <script defer>
-    PetiteVue.createApp({
-        get openApiPath() {
-            const params = new URLSearchParams(window.location.search);
-            const version = params.get("version") ?? "latest";
-            return `/${version}/openapi.json`
-        },
-    }).mount()
+    function openApiPath() {
+        const params = new URLSearchParams(window.location.search);
+        const version = params.get("version") ?? "latest";
+        return `/${version}/openapi.json`
+    }
+
+    const path = openApiPath();
+    document.getElementById("reloadable")
+        .setAttribute("spec-url", path);
+
+    console.log("adjusting versions")
 </script>
 </html>
