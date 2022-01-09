@@ -1,0 +1,24 @@
+name: Generate-Latest
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:      
+  deploy:
+      runs-on: ubuntu-20.04
+      concurrency:
+        group: ${{ github.workflow }}-${{ github.ref }}
+      steps:
+        - uses: actions/checkout@v2
+        
+        - name: Copy Files
+          run: |
+            
+        - name: Publish Code
+          run: |
+              git config --local user.email "github-actions@github.com"
+              git config --local user.name "github-actions"
+              git add ./book
+              git commit -m "🚀 Build latest book" -a
+              git push -f
