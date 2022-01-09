@@ -13,12 +13,13 @@ jobs:
         - uses: actions/checkout@v2
         
         - name: Copy Files
-          run: |
+          run: | 
+              ls -1d *.*/openapi.json | tail -n 1 | xargs -I % cp % latest/openapi.json
             
         - name: Publish Code
           run: |
               git config --local user.email "github-actions@github.com"
               git config --local user.name "github-actions"
-              git add ./book
-              git commit -m "🚀 Build latest book" -a
+              git add .
+              git commit -m "🚀 Build latest docs" -a
               git push -f
